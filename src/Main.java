@@ -9,26 +9,29 @@ public class Main {
         System.out.println("Program liczy pole pod wykresem funkcji");
         double[] cofficients = getCofficients();
         displayFunction(cofficients);
+        System.out.println();
         System.out.println("Podaj początek przedziału: ");
         double startInterval = scanner.nextDouble();
         System.out.println("Podaj koniec przedziału: ");
         double endInterval = scanner.nextDouble();
         System.out.println("Podaj liczbę przedziałow(im wiecej tym wieksza dokładnosc): ");
         int numberIntervals = scanner.nextInt();
-        double area = calculateReactangleArea(startInterval,endInterval,numberIntervals);
+        double area = calculateReactangleArea(startInterval,endInterval,numberIntervals,cofficients);
         System.out.printf("Pole pod wykresem funkcji %.3f\n",area);
     }
 
-    public static double calculateReactangleArea(double startInterval,double endInterval,int numberIntervals) {
+    public static double calculateReactangleArea(double startInterval,double endInterval,int numberIntervals,double[] cofficients) {
         double interval = (endInterval - startInterval)/numberIntervals;
         // f(x) = x^2-3x +2
         double area = 0;
         for (int i=0;i<numberIntervals;i++) {
             double temp = startInterval + i*interval;
-            area += abs(pow(temp,2) - 3 * temp + 2);
+            area += getValueFunction(cofficients,temp);
+//            area += abs(pow(temp,2) - 3 * temp + 2);
 //            area += abs(temp);
         }
-    return (interval/2) * (abs(pow(startInterval,2) - 3 * startInterval + 2) + abs(pow(endInterval,2) - 3 * endInterval + 2)+ 2*area);
+    return (interval/2) * (getValueFunction(cofficients,startInterval) + getValueFunction(cofficients,endInterval)+ 2*area);
+//    return (interval/2) * (abs(pow(startInterval,2) - 3 * startInterval + 2) + abs(pow(endInterval,2) - 3 * endInterval + 2)+ 2*area);
 //    return (interval/2) * (abs(startInterval) + abs(endInterval) + 2* area);
     }
 
@@ -49,10 +52,10 @@ public class Main {
     }
     public static double getValueFunction(double[] cofficients,double valueX) {
         double valueY = 0;
-        int lenght = cofficients.length;
-        for (int i=0;i<cofficients.length;i++) {
-            valueY = cofficients[i]* pow(valueX,lenght - 1 - i);
+        int size = cofficients.length;
+        for (int i=0;i<size;i++) {
+            valueY += cofficients[i] * pow(valueX,size - 1 - i);
         }
-        return valueY;
+        return abs(valueY);
     }
 }
