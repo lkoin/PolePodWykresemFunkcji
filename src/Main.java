@@ -30,7 +30,7 @@ public class Main {
 //            area += abs(pow(temp,2) - 3 * temp + 2);
 //            area += abs(temp);
         }
-    return (interval/2) * (getValueFunction(cofficients,startInterval) + getValueFunction(cofficients,endInterval)+ 2*area);
+    return (interval/2) * (getValueFunction(cofficients,startInterval) + getValueFunction(cofficients,endInterval)+ 2*area) ;
 //    return (interval/2) * (abs(pow(startInterval,2) - 3 * startInterval + 2) + abs(pow(endInterval,2) - 3 * endInterval + 2)+ 2*area);
 //    return (interval/2) * (abs(startInterval) + abs(endInterval) + 2* area);
     }
